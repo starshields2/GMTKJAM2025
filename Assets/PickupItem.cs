@@ -5,6 +5,7 @@ public class PickupItem : MonoBehaviour
     public float attachDistance;
     public bool isAttached;
     public GameObject _placementArea;
+    public Transform originalScale;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,6 +29,7 @@ public class PickupItem : MonoBehaviour
             this.gameObject.transform.position = _playerObject.transform.position;
             this.gameObject.transform.parent = _playerObject.transform;
             this.gameObject.transform.rotation = _playerObject.transform.rotation;
+            this.gameObject.transform.localScale = originalScale.localScale;
         }
        
     }

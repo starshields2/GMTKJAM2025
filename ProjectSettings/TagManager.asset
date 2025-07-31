@@ -6,6 +6,7 @@ TagManager:
   tags:
   - LightSwitch
   - Soda
+  - Metal
   layers:
   - Default
   - TransparentFX
