@@ -35,6 +35,7 @@ public class ObjectInteraction : MonoBehaviour
     {
         if (other.tag == "Soda")
         {
+            Debug.Log("Picked up:" + this.gameObject.name);
             PickupItem item = other.GetComponent<PickupItem>();
             item.AttachToPlayer();
         }

@@ -19,7 +19,7 @@ public class PickupItem : MonoBehaviour
 
     public void AttachToPlayer() //attach to player
     {
-        if (isAttached)
+        if (!isAttached)
         {
             isAttached = true;
             this.gameObject.transform.rotation = Quaternion.identity;
