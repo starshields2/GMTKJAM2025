@@ -37,8 +37,8 @@ public class PickupItem : MonoBehaviour
         if (isAttached)
         {
             this.gameObject.transform.parent = null;
-            this.gameObject.transform.position = _placementArea;
-            this.gameObject.transform.rotation = _placementArea;
+            this.gameObject.transform.position = _placementArea.transform.position;
+            this.gameObject.transform.rotation = _placementArea.transform.rotation;
             isAttached = false;
         }
     }
