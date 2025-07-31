@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ObjectInteraction : MonoBehaviour
 {
+    public Transform attachPoint;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,5 +29,14 @@ public class ObjectInteraction : MonoBehaviour
             _switch.TurnLightsOff();
         }
 
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Soda")
+        {
+            PickupItem item = other.GetComponent<PickupItem>();
+            item.AttachToPlayer();
+        }
     }
 }
