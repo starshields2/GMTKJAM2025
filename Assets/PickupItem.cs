@@ -3,10 +3,12 @@ using UnityEngine;
 public class PickupItem : MonoBehaviour
 {
     public float attachDistance;
+    public bool isAttached;
+    public GameObject _placementArea;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        isAttached = false;
     }
 
     // Update is called once per frame
@@ -15,13 +17,29 @@ public class PickupItem : MonoBehaviour
         
     }
 
-    public void AttachToPlayer()
+    public void AttachToPlayer() //attach to player
     {
-        this.gameObject.transform.rotation = Quaternion.identity;
-        GameObject _playerObject;
-        _playerObject = GameObject.Find("AttachPoint"); //we can use GameObject.Find bc boomerang is the ONLY boomerang in the game. bad to do this with multiple objects
-        this.gameObject.transform.position = _playerObject.transform.position;
-        this.gameObject.transform.parent = _playerObject.transform;
-        this.gameObject.transform.rotation = _playerObject.transform.rotation;
+        if (isAttached)
+        {
+            isAttached = true;
+            this.gameObject.transform.rotation = Quaternion.identity;
+            GameObject _playerObject;
+            _playerObject = GameObject.Find("AttachPoint"); //we can use GameObject.Find bc boomerang is the ONLY boomerang in the game. bad to do this with multiple objects
+            this.gameObject.transform.position = _playerObject.transform.position;
+            this.gameObject.transform.parent = _playerObject.transform;
+            this.gameObject.transform.rotation = _playerObject.transform.rotation;
+        }
+       
+    }
+
+    public void DetatchFromPlayer() // put it back where it came from
+    {
+        if (isAttached)
+        {
+            this.gameObject.transform.parent = null;
+            this.gameObject.transform.position = _placementArea;
+            this.gameObject.transform.rotation = _placementArea;
+            isAttached = false;
+        }
     }
 }
