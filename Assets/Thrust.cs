@@ -8,7 +8,7 @@ public class Thrust : MonoBehaviour
     public Animator animation;
     public GameObject windZone;
     public GameObject camera;
-    public Transform target;
+    private Transform target;
     public bool isDead = false;
     public CamFollow camScript;
     Rigidbody rb;
@@ -34,11 +34,12 @@ public class Thrust : MonoBehaviour
         {
             windZone = other.gameObject;
             inWindZone = true;
+            target = windZone.GetComponent<FanBlower>().target;
         }
-        if(other.gameObject.tag == "killObj")
+        /*if(other.gameObject.tag == "killObj")
         {
             isDead = true;
-        }
+        }*/
     }
     private void OnTriggerExit(Collider other)
     {
