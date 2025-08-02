@@ -5,12 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/GMTK_Demo.unity
     guid: b2e36c993a1fa4b498a95b2c19a7de70
-  - enabled: 1
+  - enabled: 0
     path: Assets/Levels/BoomerangTest.unity
     guid: 5f5a9bf1566ee194b836d316bdbd42c0
+  - enabled: 1
+    path: Assets/Levels/FinalGameLevels/Level 1.unity
+    guid: c2b78bd92aa73424e811b0eba4ed8718
+  - enabled: 1
+    path: Assets/Levels/FinalGameLevels/Level 2.unity
+    guid: 982ba9634c2ea9e4fad7cde053b09b0f
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
