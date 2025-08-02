@@ -51,6 +51,12 @@ public class ObjectInteraction : MonoBehaviour
             PickupItem item = other.GetComponent<PickupItem>();
             item.AttachToPlayer();
         }
+        if (other.tag == "Paper")
+        {
+            Debug.Log("Picked up:" + this.gameObject.name);
+            PickupItem item = other.GetComponent<PickupItem>();
+            item.AttachToPlayer();
+        }
     }
 
     //this what happens when we bounce off metal: 

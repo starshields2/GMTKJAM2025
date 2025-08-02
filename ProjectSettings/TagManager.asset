@@ -8,6 +8,8 @@ TagManager:
   - Soda
   - Metal
   - windArea
+  - killObj
+  - Paper
   layers:
   - Default
   - TransparentFX

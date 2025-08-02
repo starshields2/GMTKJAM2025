@@ -35,6 +35,10 @@ public class Thrust : MonoBehaviour
             windZone = other.gameObject;
             inWindZone = true;
         }
+        if(other.gameObject.tag == "killObj")
+        {
+            isDead = true;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
