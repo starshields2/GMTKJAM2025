@@ -1,16 +1,27 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using HeneGames.Airplane;
 
 public class ObjectInteraction : MonoBehaviour
 {
     public Transform attachPoint;
     public Level1Tracker _leveltrack;
+    public Level2Tracker _leve2track;
+    public GameObject _playerBoomerang;
+
+    [Header("Fan Settings")]
+    public float curFanStrength;
+    public GameObject curFan;
+    public FanBlower curFanScript;
+    public bool fanON;
+    public float fanWaitTime;
+
     //public Transform activeMetalRebound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _leveltrack = GameObject.Find("Level Objectives").GetComponent<Level1Tracker>();
+        //_leveltrack = GameObject.Find("Level Objectives").GetComponent<Level1Tracker>();
     }
 
     // Update is called once per frame
@@ -34,7 +45,7 @@ public class ObjectInteraction : MonoBehaviour
         if(otherTag == "Metal")
         {
             Debug.Log("HIT METAL!");
-            BounceStart();
+            //BounceStart();
         }
 
     }
@@ -62,17 +73,46 @@ public class ObjectInteraction : MonoBehaviour
             Debug.Log("Level 1 Step 1 - Lights - COMPLETE");
             _leveltrack.LightOff = true;
         }
+
+        if(other.tag == "windArea")
+        {
+            fanON = true;
+            FanBlower scrFanBlower = other.gameObject.GetComponent<FanBlower>();
+            curFanScript = scrFanBlower;
+            FanStart();
+           
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "windArea")
+        {
+            fanON = false;
+            Debug.Log(fanON);
+        }
     }
 
     //this what happens when we bounce off metal: 
-    void BounceStart()
+    void FanStart()
     {
-        StartCoroutine(BounceCoroutine()); //we need to be able to contain the bounce in its own function so let's use a Coroutine.
+        StartCoroutine(FanCoroutine()); //we need to be able to contain the bounce in its own function so let's use a Coroutine.
     }
 
-    private IEnumerator BounceCoroutine()
+    private IEnumerator FanCoroutine()
     {
         //put the rebound code in here
-        yield return null;
+        if (fanON)
+        {
+            _playerBoomerang.transform.LookAt(curFanScript._destination.transform);
+        }
+        SimpleAirPlaneController bRangCT = _playerBoomerang.GetComponent<SimpleAirPlaneController>();
+        bRangCT.inputTurbo = true;
+        Rigidbody rbBoomerang = _playerBoomerang.GetComponent<Rigidbody>();
+        float speed = curFanScript.strength;
+        
+        yield return new WaitForSeconds(1f);
+        fanON = false;
+        bRangCT.inputTurbo = false;
     }
 }

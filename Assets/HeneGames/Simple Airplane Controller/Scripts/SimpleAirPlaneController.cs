@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditorInternal;
 using System;
+using System.Collections;
 
 namespace HeneGames.Airplane
 {
@@ -9,6 +10,7 @@ namespace HeneGames.Airplane
     public class SimpleAirPlaneController : MonoBehaviour
     {
         public GameObject _collidedObj;
+        public float waitTime = 3f;
         public enum AirplaneState
         {
             Flying,
@@ -40,7 +42,7 @@ namespace HeneGames.Airplane
         //Input variables
         private float inputH;
         private float inputV;
-        private bool inputTurbo;
+        public bool inputTurbo;
         private bool inputYawLeft;
         private bool inputYawRight;
 
@@ -267,6 +269,20 @@ namespace HeneGames.Airplane
                 transform.Rotate(Vector3.right * (-_angle * _mutiplierXRot) * currentPitchSpeed * Time.deltaTime);
             }
         }
+
+        public void StartTurboMode()
+        {
+            StartCoroutine(TurboModeCoroutine()); // Pass the wait time directly
+        }
+
+        private IEnumerator TurboModeCoroutine()
+        {
+            inputTurbo = true;
+            waitTime = 3f;
+            yield return new WaitForSeconds(waitTime);
+            inputTurbo = false;
+        }
+
 
         private void Movement()
         {
@@ -687,7 +703,7 @@ namespace HeneGames.Airplane
             inputYawRight = Input.GetKey(KeyCode.E);
 
             //Turbo
-            inputTurbo = Input.GetKey(KeyCode.LeftShift);
+            //inputTurbo = Input.GetKey(KeyCode.LeftShift);
         }
 
         #endregion

@@ -4,9 +4,10 @@ public class Level2Tracker : MonoBehaviour
 {
     public SceneLoader sceneManager;
     public ObjectiveTracker objectiveTracker;
+    public GameObject[] vents;
 
     public bool SodaGrabbed;
-    public bool DoorClosed;
+    public bool VentOpen;
     public bool LevelComplete;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
