@@ -3,9 +3,14 @@ using UnityEngine;
 public class Thrust : MonoBehaviour
 {
     public Rigidbody boomerang;
+    public bool inWindZone = false;
+    public GameObject windZone;
+    public Transform target;
+    Rigidbody rb;
+    bool prevFrameInWind;
     
         // Mouse direction (how much has mouse moved).
-        Vector2 mDir;
+        public Vector2 mDir;
 
         public float acc = 0.3f;
         public float xSens = 1f;
@@ -14,14 +19,56 @@ public class Thrust : MonoBehaviour
         // Speed of vehicle.
         public float speed = 0f;
 
-        void Update()
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "windArea")
         {
-        if (Input.GetMouseButton(0))
-        {
-            mouseSteer();
+            windZone = other.gameObject;
+            inWindZone = true;
         }
-           
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "windArea")
+        {
+            inWindZone = false;
+            mDir = new Vector2(0,0);
+            this.transform.localRotation = Quaternion.identity;
+        }
+    }
+    /*private void FixedUpdate()
+    {
+        if (inWindZone)
+        {
+            var step = windZone.GetComponent<FanBlower>().strength * Time.deltaTime; 
+            this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, step);
+            //rb.AddForce(windZone.GetComponent<FanBlower>().blowDirection * windZone.GetComponent<FanBlower>().strength);
+        }
+    }*/
+    void Update()
+        {
+        if (inWindZone)
+        {
+            prevFrameInWind = true;
+            var step = windZone.GetComponent<FanBlower>().strength * Time.deltaTime;
+            this.transform.LookAt(target);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, step);
+            //rb.AddForce(windZone.GetComponent<FanBlower>().blowDirection * windZone.GetComponent<FanBlower>().strength);
+        }
+        else
+        {
+            if (Input.GetMouseButton(0))
+            {
+                mouseSteer();
+            }
             thrust();
+        }
+
+        
         }
 
         void thrust()
@@ -33,7 +80,9 @@ public class Thrust : MonoBehaviour
             {
                 speed += acc;
             }
-        Mathf.Clamp(speed, 0, .6f);
+            speed = Mathf.Clamp(speed, 0f, 1.5f);
+        if (speed < .0001f) speed = 0f;
+            //speed = Mathf.Round(speed * 1000)/1000;
 
             // Translate by this transform's forward vector.
             this.transform.Translate(this.transform.forward *
