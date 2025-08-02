@@ -8,6 +8,7 @@ namespace HeneGames.Airplane
     [RequireComponent(typeof(Rigidbody))]
     public class SimpleAirPlaneController : MonoBehaviour
     {
+        public GameObject _collidedObj;
         public enum AirplaneState
         {
             Flying,
@@ -156,11 +157,21 @@ namespace HeneGames.Airplane
 
             //Get and set rigidbody
             rb = GetComponent<Rigidbody>();
-            rb.isKinematic = true;
+            //rb.isKinematic = true;
             rb.useGravity = false;
             rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
-           // SetupColliders(crashCollidersRoot);
+            SetupColliders(crashCollidersRoot);
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            Debug.Log("hit: " + other.gameObject.name);
+            _collidedObj = other.gameObject;
+            if(_collidedObj.layer != 3)
+            {
+                Debug.Log("Death");
+            }
         }
 
         private void Update()
@@ -202,10 +213,9 @@ namespace HeneGames.Airplane
             }
 
             //Crash
-            if (!planeIsDead && HitSometing())
-            {
-                Crash();
-            }
+
+                
+            
         }
 
         private void SidewaysForceCalculation()
@@ -392,10 +402,10 @@ namespace HeneGames.Airplane
             UpdatePropellersAndLights();
 
             //Reset colliders
-            foreach (SimpleAirPlaneCollider _airPlaneCollider in airPlaneColliders)
-            {
-                _airPlaneCollider.collideSometing = false;
-            }
+            //foreach (SimpleAirPlaneCollider _airPlaneCollider in airPlaneColliders)
+            //{
+            //    _airPlaneCollider.collideSometing = false;
+            //}
 
             //Accelerate
             if (currentSpeed < turboSpeed)
@@ -484,36 +494,36 @@ namespace HeneGames.Airplane
             }
         }
 
-        //private void SetupColliders(Transform _root)
-        //{
-        //    if (_root == null)
-        //        return;
+        private void SetupColliders(Transform _root)
+        {
+            if (_root == null)
+                return;
 
-        //    //Get colliders from root transform
-        //    Collider[] colliders = _root.GetComponentsInChildren<Collider>();
+            //Get colliders from root transform
+            Collider[] colliders = _root.GetComponentsInChildren<Collider>();
 
-        //    //If there are colliders put components in them
-        //    for (int i = 0; i < colliders.Length; i++)
-        //    {
-        //        //Change collider to trigger
-        //        colliders[i].isTrigger = true;
+            //If there are colliders put components in them
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                //Change collider to trigger
+                //colliders[i].isTrigger = true;
 
-        //        GameObject _currentObject = colliders[i].gameObject;
+                GameObject _currentObject = colliders[i].gameObject;
 
-        //        //Add airplane collider to it and put it on the list
-        //        SimpleAirPlaneCollider _airplaneCollider = _currentObject.AddComponent<SimpleAirPlaneCollider>();
-        //        airPlaneColliders.Add(_airplaneCollider);
+                //Add airplane collider to it and put it on the list
+              //  SimpleAirPlaneCollider _airplaneCollider = _currentObject.AddComponent<SimpleAirPlaneCollider>();
+               // airPlaneColliders.Add(_airplaneCollider);
 
-        //        //Add airplane conroller reference to collider
-        //        _airplaneCollider.controller = this;
+                //Add airplane conroller reference to collider
+                //_airplaneCollider.controller = this;
 
-        //        //Add rigid body to it
-        //        Rigidbody _rb = _currentObject.AddComponent<Rigidbody>();
-        //        _rb.useGravity = false;
-        //        _rb.isKinematic = true;
-        //        _rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-        //    }
-        //}
+                //Add rigid body to it
+                Rigidbody _rb = _currentObject.AddComponent<Rigidbody>();
+                _rb.useGravity = false;
+                _rb.isKinematic = false;
+                _rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+            }
+        }
 
         private void RotatePropellers(GameObject[] _rotateThese, float _speed)
         {
@@ -547,24 +557,24 @@ namespace HeneGames.Airplane
             }
         }
 
-        private bool HitSometing()
-        {
-            for (int i = 0; i < airPlaneColliders.Count; i++)
-            {
-                if (airPlaneColliders[i].collideSometing)
-                {
-                    //Reset colliders
-                    foreach(SimpleAirPlaneCollider _airPlaneCollider in airPlaneColliders)
-                    {
-                        _airPlaneCollider.collideSometing = false;
-                    }
+        //private bool HitSometing()
+        //{
+        //    for (int i = 0; i < airPlaneColliders.Count; i++)
+        //    {
+        //        if (airPlaneColliders[i].collideSometing)
+        //        {
+        //            //Reset colliders
+        //            foreach(SimpleAirPlaneCollider _airPlaneCollider in airPlaneColliders)
+        //            {
+        //                _airPlaneCollider.collideSometing = false;
+        //            }
 
-                    return true;
-                }
-            }
+        //            return true;
+        //        }
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
         #endregion
 
