@@ -6,13 +6,22 @@ public class CamFollow : MonoBehaviour
     public Transform target;
     public float followDist = 5f;
     public float upDist = 1f;
+    public GameObject boomerang;
 
     // Update is called once per frame
     void Update()
     {
-        this.transform.LookAt(target.position);
-        this.transform.position = target.position +
-            (this.transform.forward * -1 * followDist);
+        if (!boomerang.GetComponent<Thrust>().isDead)
+        {
+            this.transform.LookAt(target.position);
+            this.transform.position = target.position +
+                (this.transform.forward * -1 * followDist);
+        }
+        else
+        {
+            this.transform.LookAt(target.position);
+        }
+        
        
 
 

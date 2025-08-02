@@ -4,8 +4,13 @@ public class Thrust : MonoBehaviour
 {
     public Rigidbody boomerang;
     public bool inWindZone = false;
+    public AudioSource audio;
+    public Animator animation;
     public GameObject windZone;
+    public GameObject camera;
     public Transform target;
+    public bool isDead = false;
+    public CamFollow camScript;
     Rigidbody rb;
     bool prevFrameInWind;
     
@@ -49,7 +54,7 @@ public class Thrust : MonoBehaviour
             //rb.AddForce(windZone.GetComponent<FanBlower>().blowDirection * windZone.GetComponent<FanBlower>().strength);
         }
     }*/
-    void Update()
+    void FixedUpdate()
         {
         if (inWindZone)
         {
@@ -59,7 +64,7 @@ public class Thrust : MonoBehaviour
             this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, step);
             //rb.AddForce(windZone.GetComponent<FanBlower>().blowDirection * windZone.GetComponent<FanBlower>().strength);
         }
-        else
+        else if(!isDead)
         {
             if (Input.GetMouseButton(0))
             {
@@ -67,7 +72,15 @@ public class Thrust : MonoBehaviour
             }
             thrust();
         }
-
+        else
+        {
+            boomerang.useGravity = true;
+            audio.Pause();
+            //animation.Play("Any State");
+            animation.SetBool("Die", true);
+            //camScript.isDead = true;
+            //camera.GetComponent<CamFollow>().isDead = false;
+        }
         
         }
 
