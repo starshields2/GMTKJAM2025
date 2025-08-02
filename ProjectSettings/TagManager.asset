@@ -8,6 +8,7 @@ TagManager:
   - Soda
   - Metal
   - windArea
+  - Door
   layers:
   - Default
   - TransparentFX
