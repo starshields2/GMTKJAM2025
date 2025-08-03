@@ -17,6 +17,8 @@ public class ObjectInteraction : MonoBehaviour
     public bool fanON;
     public float fanWaitTime;
 
+    public bool paperRetrieved = false;
+
 
 
     //public Transform activeMetalRebound;
@@ -54,7 +56,19 @@ public class ObjectInteraction : MonoBehaviour
             _level2track.SodaGrabbed = true;
             _level2track.OpenAllVents();
         }
-        if(other.tag == "Door")
+        if (other.tag == "killObj")
+        {
+            _playerBoomerang.GetComponent<SimpleAirPlaneController>().isDead = true;
+        }
+        if (other.tag == "Paper")
+        {
+            Debug.Log("Picked up:" + this.gameObject.name);
+            paperRetrieved = true;
+            PickupItem item = other.GetComponent<PickupItem>();
+            item.AttachToPlayer();
+            //_level4track.SodaGrabbed = true;
+        }
+        if (other.tag == "Door")
         {
             Debug.Log("Closed door: " + other.name);
             Door _door = other.GetComponent<Door>();
@@ -104,6 +118,7 @@ public class ObjectInteraction : MonoBehaviour
     private IEnumerator FanCoroutine()
     {
         //put the rebound code in here
+        if (paperRetrieved) curFanScript._destination = curFanScript._destinationReturn;
         if (fanON)
         {
             _playerBoomerang.transform.LookAt(curFanScript._destination.transform);

@@ -10342,6 +10342,7 @@ MonoBehaviour:
   strength: 91.2
   target: {fileID: 0}
   _destination: {fileID: 1802993838}
+  _destinationReturn: {fileID: 0}
   blowDirection: {x: 0, y: 0, z: 1}
 --- !u!65 &1038649565
 BoxCollider:
@@ -12117,6 +12118,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5655227674143977153, guid: bebe5fae0b9f0e94a8a2af3207b79b61, type: 3}
+      propertyPath: _playerBoomerang
+      value: 
+      objectReference: {fileID: 1538484402}
     - target: {fileID: 5753239315916371630, guid: bebe5fae0b9f0e94a8a2af3207b79b61, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -14320,6 +14325,7 @@ MonoBehaviour:
   curFanScript: {fileID: 1038649564}
   fanON: 0
   fanWaitTime: 4.61
+  paperRetrieved: 0
 --- !u!4 &1548838573 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3324518524069055047, guid: d6d4f2b46c6785f49bafc125e525ebe3, type: 3}
@@ -16881,6 +16887,7 @@ MonoBehaviour:
   curFanScript: {fileID: 0}
   fanON: 0
   fanWaitTime: 0
+  paperRetrieved: 0
 --- !u!4 &1835755662
 Transform:
   m_ObjectHideFlags: 0
@@ -17909,6 +17916,7 @@ MonoBehaviour:
   curFanScript: {fileID: 0}
   fanON: 0
   fanWaitTime: 0
+  paperRetrieved: 0
 --- !u!114 &1969022748
 MonoBehaviour:
   m_ObjectHideFlags: 0

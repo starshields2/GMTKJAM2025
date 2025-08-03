@@ -13,7 +13,7 @@ public class Level2Tracker : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        objectiveTracker = GameObject.Find("Objective Tracker").GetComponent<ObjectiveTracker>();
+        objectiveTracker = GameObject.Find("Level Objectives").GetComponent<ObjectiveTracker>();
     }
 
     public void OpenAllVents()
