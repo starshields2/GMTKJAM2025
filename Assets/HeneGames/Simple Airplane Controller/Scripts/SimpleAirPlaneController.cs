@@ -12,6 +12,7 @@ namespace HeneGames.Airplane
         public bool isDead = false;
         public GameObject _collidedObj;
         public float waitTime = 3f;
+        public bool finalTurbo = false;
      
         public enum AirplaneState
         {
@@ -78,11 +79,11 @@ namespace HeneGames.Airplane
         [SerializeField] private float rollTurboMultiplier = 1f;
 
         [Header("Moving speed")]
-        [Range(5f, 100f)]
-        [SerializeField] public float defaultSpeed = 10f;
+        [Range(5f, 5000f)]
+        [SerializeField] public float defaultSpeed = 300f;
 
-        [Range(10f, 200f)]
-        [SerializeField] public float turboSpeed = 20f;
+        [Range(10f, 2000f)]
+        [SerializeField] public float turboSpeed = 800f;
 
         [Range(0.1f, 50f)]
         [SerializeField] private float accelerating = 10f;
@@ -177,7 +178,7 @@ namespace HeneGames.Airplane
         {
             if (!isDead)
             {
-                AudioSystem();
+               
                 HandleInputs();
 
                 switch (airplaneState)
@@ -283,9 +284,9 @@ namespace HeneGames.Airplane
         private IEnumerator TurboModeCoroutine()
         {
             inputTurbo = true;
-            waitTime = 3f;
+            //waitTime = 3f;
             yield return new WaitForSeconds(waitTime);
-            inputTurbo = false;
+            //inputTurbo = false;
         }
 
 
@@ -325,16 +326,16 @@ namespace HeneGames.Airplane
             if (inputTurbo && !turboOverheat)
             {
                 //Turbo overheating
-                if(turboHeat > 100f)
-                {
-                    turboHeat = 100f;
-                    turboOverheat = true;
-                }
-                else
-                {       
-                    //Add turbo heat
-                    turboHeat += Time.deltaTime * turboHeatingSpeed;
-                }
+                //if(turboHeat > 100f)
+                //{
+                //    turboHeat = 100f;
+                //    turboOverheat = true;
+                //}
+                //else
+                //{       
+                //    //Add turbo heat
+                //    turboHeat += Time.deltaTime * turboHeatingSpeed;
+                //}
 
                 //Set speed to turbo speed and rotation to turbo values
                 maxSpeed = turboSpeed;

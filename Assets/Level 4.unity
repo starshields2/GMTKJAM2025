@@ -20632,6 +20632,7 @@ MonoBehaviour:
   _leveltrack: {fileID: 0}
   _level2track: {fileID: 0}
   _playerBoomerang: {fileID: 0}
+  meteor: {fileID: 0}
   curFanStrength: 0
   curFan: {fileID: 0}
   curFanScript: {fileID: 0}
