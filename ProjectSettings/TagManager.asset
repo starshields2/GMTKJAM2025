@@ -13,11 +13,13 @@ TagManager:
   - ActivateMeteor
   - BigMeteor
   - WeakPoint
+  - Level2Check
+  - Door
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - WallCollision
   - Water
   - UI
   - 

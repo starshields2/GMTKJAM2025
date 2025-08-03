@@ -34,21 +34,13 @@ public class ObjectInteraction : MonoBehaviour
     //for hits
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("hit something?");
+      
         //get a ref to hit object.
         GameObject otherObject = collision.gameObject;
         // Get the tag of the other GameObject
         string otherTag = otherObject.tag;
-        //print to console log, the other object:
-        Debug.Log(otherObject);
 
-        //find out what it is
-
-        if(otherTag == "Metal")
-        {
-            Debug.Log("HIT METAL!");
-            //BounceStart();
-        }
+          Debug.Log("hit: " + otherObject);
 
     }
     //for pickups

@@ -162,19 +162,14 @@ namespace HeneGames.Airplane
             rb = GetComponent<Rigidbody>();
             //rb.isKinematic = true;
             rb.useGravity = false;
-            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
             SetupColliders(crashCollidersRoot);
         }
 
         private void OnCollisionEnter(Collision other)
         {
-            Debug.Log("hit: " + other.gameObject.name);
-            _collidedObj = other.gameObject;
-            if(_collidedObj.layer != 3)
-            {
-                Debug.Log("Death");
-            }
+                Crash();
         }
 
         private void Update()
@@ -416,30 +411,9 @@ namespace HeneGames.Airplane
 
         private void TakeoffUpdate()
         {
-            UpdatePropellersAndLights();
 
-            //Reset colliders
-            //foreach (SimpleAirPlaneCollider _airPlaneCollider in airPlaneColliders)
-            //{
-            //    _airPlaneCollider.collideSometing = false;
-            //}
-
-            //Accelerate
-            if (currentSpeed < turboSpeed)
-            {
-                currentSpeed += (accelerating * 2f) * Time.deltaTime;
-            }
-
-            //Move forward
-            transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
-
-            //Far enough from the runaway go back to flying state
-            float _distanceToRunway = Vector3.Distance(transform.position, currentRunway.transform.position);
-            if(_distanceToRunway > takeoffLenght)
-            {
-                currentRunway = null;
                 airplaneState = AirplaneState.Flying;
-            }
+            
         }
 
         #endregion
@@ -606,19 +580,40 @@ namespace HeneGames.Airplane
             rb.isKinematic = false;
             rb.useGravity = true;
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            airplaneState = AirplaneState.Landing;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            transform.rotation = Quaternion.identity; // optional
 
             //Add last speed to rb
-            rb.AddForce(transform.forward * lastEngineSpeed, ForceMode.VelocityChange);
+            // rb.AddForce(transform.forward * lastEngineSpeed, ForceMode.VelocityChange);
 
-            //Change every collider trigger state and remove rigidbodys
-            for (int i = 0; i < airPlaneColliders.Count; i++)
-            {
-                airPlaneColliders[i].GetComponent<Collider>().isTrigger = false;
-                Destroy(airPlaneColliders[i].GetComponent<Rigidbody>());
-            }
+            ////Change every collider trigger state and remove rigidbodys
+            //for (int i = 0; i < airPlaneColliders.Count; i++)
+            //{
+            //    airPlaneColliders[i].GetComponent<Collider>().isTrigger = false;
+            //    Destroy(airPlaneColliders[i].GetComponent<Rigidbody>());
+            //}
 
             //Kill player
             planeIsDead = true;
+            Revive();
+        }
+
+        public void Revive()
+        {
+            Debug.Log("REVIVING!");
+            StartCoroutine(ReviveBoomerang());
+        }
+
+        public IEnumerator ReviveBoomerang()
+        {
+            yield return new WaitForSeconds(1f);
+            planeIsDead = false;
+            rb.useGravity = false;
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            airplaneState = AirplaneState.Takeoff;
+
         }
 
         #endregion
