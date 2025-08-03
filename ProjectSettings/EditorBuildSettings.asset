@@ -23,6 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/FinalGameLevels/Level 3.unity
     guid: 41bdc78af96705e4f9ae50b8588e0507
+  - enabled: 1
+    path: Assets/Levels/FinalGameLevels/Intermission.unity
+    guid: 36d0766717255ce4aac7c7fa9258d95e
+  - enabled: 1
+    path: Assets/Level 4.unity
+    guid: af961c1077e199d408fc4326d2af9e92
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05

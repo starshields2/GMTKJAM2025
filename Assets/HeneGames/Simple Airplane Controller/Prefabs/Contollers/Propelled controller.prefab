@@ -349,6 +349,7 @@ MonoBehaviour:
   curFanScript: {fileID: 0}
   fanON: 0
   fanWaitTime: 0
+  paperRetrieved: 0
 --- !u!1 &1604401905625729398
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d236260ee0d659a4383b8680de7ec2ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
   _collidedObj: {fileID: 0}
   waitTime: 3
   inputTurbo: 0
@@ -607,7 +609,7 @@ MonoBehaviour:
   yawTurboMultiplier: 0.3
   pitchTurboMultiplier: 0.5
   rollTurboMultiplier: 1
-  defaultSpeed: 20
+  defaultSpeed: 28.9
   turboSpeed: 40
   accelerating: 10
   deaccelerating: 5
@@ -703,6 +705,7 @@ MonoBehaviour:
   curFanScript: {fileID: 0}
   fanON: 0
   fanWaitTime: 0
+  paperRetrieved: 0
 --- !u!136 &7922938847187697798
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1871,13 +1874,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 454b341d667baa04b9c829f06fb59155, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7503066695551909540}
   m_SourcePrefab: {fileID: 100100000, guid: 454b341d667baa04b9c829f06fb59155, type: 3}
 --- !u!4 &1445440585259906162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 454b341d667baa04b9c829f06fb59155, type: 3}
   m_PrefabInstance: {fileID: 1406677727328867225}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2253185341394071240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 454b341d667baa04b9c829f06fb59155, type: 3}
+  m_PrefabInstance: {fileID: 1406677727328867225}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7503066695551909540
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2253185341394071240}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e9edc06e40ef9354a9ecddb1ddcb345f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &9150788394580846561
 PrefabInstance:
   m_ObjectHideFlags: 0

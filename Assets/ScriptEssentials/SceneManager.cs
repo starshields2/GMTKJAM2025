@@ -12,9 +12,26 @@ public class SceneLoader : MonoBehaviour
 
     void Awake()
     {
-       
+        IntermissionStart();
+        Scene scene = SceneManager.GetActiveScene();
+        Debug.Log(scene.name);
     }
+    public void IntermissionStart()
+    {
+        StartCoroutine(IntermissionSequence());
+    }
+    public IEnumerator IntermissionSequence()
+    {
+       
+        Scene scene = SceneManager.GetActiveScene();
 
+        // Check if the name of the current Active Scene is your first Scene.
+        if (scene.name == "Intermission")
+        { 
+            yield return new WaitForSeconds(10);
+            LoadScene("Level 4");
+        }
+    }
     //to load a scene instantly
     public void LoadScene(string sceneToLoad)
     {
