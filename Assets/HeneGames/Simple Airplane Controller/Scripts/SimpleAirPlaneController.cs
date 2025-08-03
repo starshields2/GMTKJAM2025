@@ -12,6 +12,7 @@ namespace HeneGames.Airplane
         public bool isDead = false;
         public GameObject _collidedObj;
         public float waitTime = 3f;
+     
         public enum AirplaneState
         {
             Flying,
@@ -78,10 +79,10 @@ namespace HeneGames.Airplane
 
         [Header("Moving speed")]
         [Range(5f, 100f)]
-        [SerializeField] private float defaultSpeed = 10f;
+        [SerializeField] public float defaultSpeed = 10f;
 
         [Range(10f, 200f)]
-        [SerializeField] private float turboSpeed = 20f;
+        [SerializeField] public float turboSpeed = 20f;
 
         [Range(0.1f, 50f)]
         [SerializeField] private float accelerating = 10f;
@@ -179,23 +180,31 @@ namespace HeneGames.Airplane
 
         private void Update()
         {
-            AudioSystem();
-            HandleInputs();
-
-            switch (airplaneState)
+            if (!isDead)
             {
-                case AirplaneState.Flying:
-                    FlyingUpdate();
-                    break;
+                AudioSystem();
+                HandleInputs();
 
-                case AirplaneState.Landing:
-                    LandingUpdate();
-                    break;
+                switch (airplaneState)
+                {
+                    case AirplaneState.Flying:
+                        FlyingUpdate();
+                        break;
 
-                case AirplaneState.Takeoff:
-                    TakeoffUpdate();
-                    break;
+                    case AirplaneState.Landing:
+                        LandingUpdate();
+                        break;
+
+                    case AirplaneState.Takeoff:
+                        TakeoffUpdate();
+                        break;
+                }
             }
+            else
+            {
+                rb.useGravity = true;
+            }
+            
         }
 
         #region Flying State
