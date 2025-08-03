@@ -16,7 +16,10 @@ EditorBuildSettings:
     guid: c2b78bd92aa73424e811b0eba4ed8718
   - enabled: 1
     path: Assets/Levels/FinalGameLevels/Level 2.unity
-    guid: 982ba9634c2ea9e4fad7cde053b09b0f
+    guid: 469b639e945e0e245864894942d4d633
+  - enabled: 1
+    path: Assets/Levels/FinalGameLevels/Level 3.unity
+    guid: d227729a7e4639e478f0a81b8ae46b9b
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05

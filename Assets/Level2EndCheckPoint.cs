@@ -1,41 +1,29 @@
 using UnityEngine;
 
-public class Level2Tracker : MonoBehaviour
+public class Level2EndCheckPoint : MonoBehaviour
 {
     public SceneLoader sceneManager;
     public ObjectiveTracker objectiveTracker;
-    public Vent[] vents;
+    public MaterialFlash _flasher;
+    public string nextSceneName;
 
     public bool SodaGrabbed;
-    public bool BackAtBed;
+    public bool BackatBed;
     public bool LevelComplete;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        objectiveTracker = GameObject.Find("Objective Tracker").GetComponent<ObjectiveTracker>();
-    }
-
-    public void OpenAllVents()
-    {
-        foreach (Vent _vScript in vents)
-        {
-            _vScript.OpenVent();
-        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (SodaGrabbed)
-        {
-            OpenAllVents();
-        }
-
-        if (SodaGrabbed && BackAtBed)
+        if(SodaGrabbed && BackatBed)
         {
             LevelComplete = true;
             objectiveTracker.levelTwo = true;
+            sceneManager.LoadScene(nextSceneName);
         }
     }
 }

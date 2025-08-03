@@ -7,7 +7,7 @@ public class ObjectInteraction : MonoBehaviour
 {
     public Transform attachPoint;
     public Level1Tracker _leveltrack;
-    public Level2Tracker _leve2track;
+    public Level2EndCheckPoint _level2track;
     public GameObject _playerBoomerang;
 
     [Header("Fan Settings")]
@@ -57,6 +57,7 @@ public class ObjectInteraction : MonoBehaviour
             Debug.Log("Picked up:" + this.gameObject.name);
             PickupItem item = other.GetComponent<PickupItem>();
             item.AttachToPlayer();
+            _level2track.SodaGrabbed = true;
         }
         if(other.tag == "Door")
         {
@@ -81,6 +82,12 @@ public class ObjectInteraction : MonoBehaviour
             curFanScript = scrFanBlower;
             FanStart();
            
+        }
+
+        if(other.tag == "Level2Check")
+        {
+            Level2EndCheckPoint endLevel = other.gameObject.GetComponent<Level2EndCheckPoint>();
+            endLevel.BackatBed = true;
         }
     }
 
