@@ -10,6 +10,7 @@ public class Thrust : MonoBehaviour
     public GameObject camera;
     private Transform target;
     public bool isDead = false;
+    public float maxAcc = 1.5f;
     public CamFollow camScript;
     Rigidbody rb;
     bool prevFrameInWind;
@@ -98,7 +99,7 @@ public class Thrust : MonoBehaviour
             {
                 speed += acc;
             }
-            speed = Mathf.Clamp(speed, 0f, 1.5f);
+            speed = Mathf.Clamp(speed, 0f, maxAcc);
         if (speed < .0001f) speed = 0f;
             //speed = Mathf.Round(speed * 1000)/1000;
 

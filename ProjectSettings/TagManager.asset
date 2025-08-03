@@ -10,6 +10,9 @@ TagManager:
   - windArea
   - killObj
   - Paper
+  - ActivateMeteor
+  - BigMeteor
+  - WeakPoint
   layers:
   - Default
   - TransparentFX
