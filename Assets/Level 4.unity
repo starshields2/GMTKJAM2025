@@ -8542,6 +8542,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1786827224}
     - target: {fileID: 8793844478064349485, guid: bebe5fae0b9f0e94a8a2af3207b79b61, type: 3}
+      propertyPath: animation
+      value: 
+      objectReference: {fileID: 1238987220}
+    - target: {fileID: 8793844478064349485, guid: bebe5fae0b9f0e94a8a2af3207b79b61, type: 3}
       propertyPath: turboSpeed
       value: 200
       objectReference: {fileID: 0}
@@ -13118,6 +13122,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6534620689486427654, guid: 8d6ced06318c04ceb8cb56dff03a9375, type: 3}
   m_PrefabInstance: {fileID: 1332019629}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1238987220 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7503066695551909540, guid: bebe5fae0b9f0e94a8a2af3207b79b61, type: 3}
+  m_PrefabInstance: {fileID: 868017688}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1239536408
 GameObject:
   m_ObjectHideFlags: 0
@@ -13431,7 +13440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5244539871540010797, guid: 9ad4e6795e07aee4187ac33cd706c77d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6783157154165771040, guid: 9ad4e6795e07aee4187ac33cd706c77d, type: 3}
       propertyPath: sceneName

@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectiveTracker: {fileID: 268784232}
   sceneName: BoomerangTest
+  retrievedSceneName: 
   _transition: {fileID: 1437654979}
   _transitionTime: 1.07
 --- !u!4 &15473793
@@ -12801,7 +12802,7 @@ PrefabInstance:
       objectReference: {fileID: 268784234}
     - target: {fileID: 8793844478064349485, guid: bebe5fae0b9f0e94a8a2af3207b79b61, type: 3}
       propertyPath: defaultSpeed
-      value: 28.9
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18784,6 +18785,7 @@ MonoBehaviour:
   _leveltrack: {fileID: 268784234}
   _level2track: {fileID: 0}
   _playerBoomerang: {fileID: 0}
+  meteor: {fileID: 0}
   curFanStrength: 0
   curFan: {fileID: 0}
   curFanScript: {fileID: 0}

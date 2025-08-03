@@ -11954,6 +11954,10 @@ PrefabInstance:
       propertyPath: turboSpeed
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 8793844478064349485, guid: bebe5fae0b9f0e94a8a2af3207b79b61, type: 3}
+      propertyPath: defaultSpeed
+      value: 18
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5655227674143977153, guid: bebe5fae0b9f0e94a8a2af3207b79b61, type: 3}
     m_RemovedGameObjects:

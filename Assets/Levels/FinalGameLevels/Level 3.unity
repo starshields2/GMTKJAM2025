@@ -1548,6 +1548,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2059648717650261930, guid: 18348ea5f82c49b49aaabeb0e3112bdc, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2059648717650261930, guid: 18348ea5f82c49b49aaabeb0e3112bdc, type: 3}
+      propertyPath: m_Center.x
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 3396452480794989681, guid: 18348ea5f82c49b49aaabeb0e3112bdc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.042

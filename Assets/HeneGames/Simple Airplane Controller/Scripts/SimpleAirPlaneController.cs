@@ -13,7 +13,9 @@ namespace HeneGames.Airplane
         public GameObject _collidedObj;
         public float waitTime = 3f;
         public bool finalTurbo = false;
-     
+        public AudioSource audio;
+        public Animator animation;
+
         public enum AirplaneState
         {
             Flying,
@@ -199,6 +201,8 @@ namespace HeneGames.Airplane
             else
             {
                 rb.useGravity = true;
+                //audio.Pause();
+                animation.SetBool("Die", true);
             }
             
         }
