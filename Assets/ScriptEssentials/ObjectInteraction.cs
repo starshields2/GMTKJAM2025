@@ -17,6 +17,8 @@ public class ObjectInteraction : MonoBehaviour
     public bool fanON;
     public float fanWaitTime;
 
+
+
     //public Transform activeMetalRebound;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
