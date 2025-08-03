@@ -22,6 +22,8 @@ public class PickupItem : MonoBehaviour
     {
         if (!isAttached)
         {
+            float scale = 2.5f;
+            if (this.gameObject.tag == "Paper") scale = 10f;
             isAttached = true;
             this.gameObject.transform.rotation = Quaternion.identity;
             GameObject _playerObject;
@@ -29,7 +31,7 @@ public class PickupItem : MonoBehaviour
             this.gameObject.transform.position = _playerObject.transform.position;
             this.gameObject.transform.parent = _playerObject.transform;
             this.gameObject.transform.rotation = _playerObject.transform.rotation;
-            this.gameObject.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
+            this.gameObject.transform.localScale = new Vector3(scale, scale, scale);
         }
        
     }
