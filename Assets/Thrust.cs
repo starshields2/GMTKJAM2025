@@ -1,98 +1,56 @@
 using UnityEngine;
-using System.Collections;
-using System;
 
 public class Thrust : MonoBehaviour
 {
-    [Header("Boomerang Essenstials")]
-    //[ToolTip("If you take these away it won't work!!!")]
     public Rigidbody boomerang;
-    public Transform target;
-    public Transform trackTarget;
-    public Vector3 boomRotationR;
-    public Vector3 boomRotationU;
-
-
-    // Mouse direction (how much has mouse moved).
-    public Vector2 mDir;
-    [Header("Boomerang Movement Controls")]
-    public float acc = 0.3f;
-    public float xSens = 1f;
-    public float ySens = 1f;
-    public bool canMove;
-    // Speed of vehicle.
-    public float speed = 0f;
-    public float rotateSpeed = 5f;
-
-    [Header("Wind Zone")]
     public bool inWindZone = false;
+    public AudioSource audio;
+    public Animator animation;
     public GameObject windZone;
-    public float windForce;
+    public GameObject camera;
+    private Transform target;
+    public bool isDead = false;
+    public float maxAcc = 1.5f;
+    public CamFollow camScript;
+    Rigidbody rb;
+    bool prevFrameInWind;
+    
+        // Mouse direction (how much has mouse moved).
+        public Vector2 mDir;
+
+        public float acc = 0.3f;
+        public float xSens = 1f;
+        public float ySens = 1f;
+
+        // Speed of vehicle.
+        public float speed = 0f;
 
     private void Start()
     {
-        canMove = true;
-        boomerang = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "windArea")
+        if(other.gameObject.tag == "windArea")
         {
             windZone = other.gameObject;
             inWindZone = true;
-            Debug.Log("Entering Fan.");
-            EnterFan();
+            target = windZone.GetComponent<FanBlower>().target;
         }
+        /*if(other.gameObject.tag == "killObj")
+        {
+            isDead = true;
+        }*/
     }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "windArea")
         {
-            canMove = true;
-            ExitFan();
+            inWindZone = false;
+            mDir = new Vector2(0,0);
+            this.transform.localRotation = Quaternion.identity;
         }
     }
-
-    private void EnterFan()
-    {
-        StartCoroutine(EnterFanLogic());
-    }
-
-    private IEnumerator EnterFanLogic()
-    {
-        mDir = new Vector2(0, 0);
-        canMove = false;
-        acc = 0;
-        speed = 0;
-        xSens = 0;
-        ySens = 0;
-        //var step = windZone.GetComponent<FanBlower>().strength * Time.deltaTime;
-        //this.transform.LookAt(target);
-        //this.transform.rotation *= Quaternion.FromToRotation(Vector3.left, Vector3.forward);
-        boomerang.AddForce(target.transform.forward * windForce);
-        yield return null;
-        //rb.AddForce(windZone.GetComponent<FanBlower>().blowDirection * windZone.GetComponent<FanBlower>().strength);
-    }
-
-    private void ExitFan()
-    {
-        StartCoroutine(ExitFanLogic());
-    }
-
-    private IEnumerator ExitFanLogic()
-    {
-        Debug.Log("Exiting Fan.");
-        canMove = true;
-        inWindZone = false;
-        yield return null;
-        this.transform.LookAt(target);
-        acc = 0.06f;
-        xSens = 1.25f;
-        ySens = 1.25f;
-    }
-
     /*private void FixedUpdate()
     {
         if (inWindZone)
@@ -102,61 +60,73 @@ public class Thrust : MonoBehaviour
             //rb.AddForce(windZone.GetComponent<FanBlower>().blowDirection * windZone.GetComponent<FanBlower>().strength);
         }
     }*/
-
     void FixedUpdate()
-    {
-        // Remove this if you don't want auto-tracking
-        // this.transform.LookAt(trackTarget);
-
-        if (Input.GetMouseButton(0))
         {
-            mouseSteer();
+        if (inWindZone)
+        {
+            prevFrameInWind = true;
+            var step = windZone.GetComponent<FanBlower>().strength * Time.deltaTime;
+            this.transform.LookAt(target);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, step);
+            //rb.AddForce(windZone.GetComponent<FanBlower>().blowDirection * windZone.GetComponent<FanBlower>().strength);
+        }
+        else if(!isDead)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                mouseSteer();
+            }
+            thrust();
+        }
+        else
+        {
+            boomerang.useGravity = true;
+            audio.Pause();
+            //animation.Play("Any State");
+            animation.SetBool("Die", true);
+            //camScript.isDead = true;
+            //camera.GetComponent<CamFollow>().isDead = false;
+        }
+        
         }
 
-        thrust();
-
-        if (Input.GetMouseButtonUp(0))
+        void thrust()
         {
-            mDir = new Vector2(0, 0);
-            //this.gameObject.transform.localRotation = Quaternion.identity;
-        }
-    }
 
-    void thrust()
-    {
-        // Pressed key?
-        // Increase speed.
-        if (Input.GetKey(KeyCode.W))
-        {
-            speed += acc;
-        }
-        speed = Mathf.Clamp(speed, 0f, 1.5f);
+            // Pressed key?
+            // Increase speed.
+            if (Input.GetKey(KeyCode.W))
+            {
+                speed += acc;
+            }
+            speed = Mathf.Clamp(speed, 0f, maxAcc);
         if (speed < .0001f) speed = 0f;
-        //speed = Mathf.Round(speed * 1000)/1000;
+            //speed = Mathf.Round(speed * 1000)/1000;
 
-        // Translate by this transform's forward vector.
-        boomerang.linearVelocity = transform.forward * speed * Time.time;
+            // Translate by this transform's forward vector.
+            this.transform.Translate(this.transform.forward *
+             Time.deltaTime * speed);
 
-        // Deceleration/air friction.
-        // speed *= 0.96f;
-    }
+            // Deceleration/air friction.
+            speed *= 0.96f;
+        }
 
-    void mouseSteer()
-    {
-        if (canMove)
+        void mouseSteer()
         {
-            Debug.Log("Euler X: " + transform.rotation.eulerAngles.x);
-            Debug.Log("Euler Y: " + transform.rotation.eulerAngles.y);
-            Debug.Log("Euler Z: " + transform.rotation.eulerAngles.z);
+            // What is the new mouse position on screen?
+            Vector2 mc = new Vector2(Input.GetAxisRaw("Mouse X"),
+             Input.GetAxisRaw("Mouse Y"));
 
+            // Add new movement to current mouse direction.
+            mDir += mc;
 
-            transform.Rotate(Vector3.right * rotateSpeed * Input.GetAxis("Mouse Y"));    //Uses the left/right mouse movement to rotate the object.
-            transform.Rotate(Vector3.up * rotateSpeed * Input.GetAxis("Mouse X"));    //Uses the up/down mouse movement to rotate the object.
-
+            // Multiply both axes together and rotate this transform.
+            this.transform.localRotation =
+             Quaternion.AngleAxis(mDir.x * xSens, Vector3.up) *
+             Quaternion.AngleAxis(-mDir.y * ySens, Vector3.right);
 
         }
-    }
-
+        
     /*void Start()
     {
         Cursor.visible = true;
