@@ -9,6 +9,7 @@ TagManager:
   - Metal
   - windArea
   - Door
+  - Level2Check
   layers:
   - Default
   - TransparentFX

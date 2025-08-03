@@ -58,6 +58,7 @@ public class ObjectInteraction : MonoBehaviour
             PickupItem item = other.GetComponent<PickupItem>();
             item.AttachToPlayer();
             _level2track.SodaGrabbed = true;
+            _level2track.OpenAllVents();
         }
         if(other.tag == "Door")
         {
