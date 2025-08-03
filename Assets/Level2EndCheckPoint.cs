@@ -7,6 +7,9 @@ public class Level2EndCheckPoint : MonoBehaviour
     public MaterialFlash _flasher;
     public string nextSceneName;
 
+    public Vent[] vents;
+
+
     public bool SodaGrabbed;
     public bool BackatBed;
     public bool LevelComplete;
@@ -15,6 +18,16 @@ public class Level2EndCheckPoint : MonoBehaviour
     {
         
     }
+
+    public void OpenAllVents()
+    {
+        foreach (Vent _vScript in vents)
+        {
+            _vScript.OpenVent();
+        }
+    }
+
+
 
     // Update is called once per frame
     void Update()

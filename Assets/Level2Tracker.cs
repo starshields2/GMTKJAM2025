@@ -27,10 +27,6 @@ public class Level2Tracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SodaGrabbed)
-        {
-            OpenAllVents();
-        }
 
         if (SodaGrabbed && BackAtBed)
         {
