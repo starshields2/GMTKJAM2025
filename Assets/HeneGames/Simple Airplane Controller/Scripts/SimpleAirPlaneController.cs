@@ -9,6 +9,7 @@ namespace HeneGames.Airplane
     [RequireComponent(typeof(Rigidbody))]
     public class SimpleAirPlaneController : MonoBehaviour
     {
+        public bool isDead = false;
         public GameObject _collidedObj;
         public float waitTime = 3f;
         public enum AirplaneState

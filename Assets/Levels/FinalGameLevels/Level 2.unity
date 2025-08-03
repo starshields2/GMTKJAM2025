@@ -10232,6 +10232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strength: 91.2
+  target: {fileID: 0}
   _destination: {fileID: 1802993838}
   blowDirection: {x: 0, y: 0, z: 1}
 --- !u!65 &1038649565
@@ -17838,20 +17839,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boomerang: {fileID: 1969022743}
-  target: {fileID: 0}
-  trackTarget: {fileID: 683519244}
-  boomRotationR: {x: 0, y: 0, z: 0}
-  boomRotationU: {x: 0, y: 0, z: 0}
+  inWindZone: 0
+  audio: {fileID: 0}
+  animation: {fileID: 0}
+  windZone: {fileID: 0}
+  camera: {fileID: 0}
+  isDead: 0
+  maxAcc: 1.5
+  camScript: {fileID: 0}
   mDir: {x: 0, y: 0}
   acc: 0.3
   xSens: 1
   ySens: 1
-  canMove: 0
   speed: 0.7
-  rotateSpeed: 5
-  inWindZone: 0
-  windZone: {fileID: 0}
-  windForce: 0
 --- !u!1001 &1974677092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18704,6 +18704,7 @@ MonoBehaviour:
   target: {fileID: 1538484405}
   followDist: 3.3
   upDist: 1
+  boomerang: {fileID: 1538484402}
 --- !u!1001 &2088775879
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,13 +8,16 @@ TagManager:
   - Soda
   - Metal
   - windArea
-  - Door
-  - Level2Check
+  - killObj
+  - Paper
+  - ActivateMeteor
+  - BigMeteor
+  - WeakPoint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - IgnoreDeath
+  - 
   - Water
   - UI
   - 
