@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ContainerScript : MonoBehaviour
+public class MeteorScript : MonoBehaviour
 {
     public bool SpawningMeteors = false;
     public int health = 1;
@@ -14,7 +14,7 @@ public class ContainerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health == 0)
+        if (health <= 0)
         {
             //Explode Meteor and Boomerang
             Destroy(gameObject);

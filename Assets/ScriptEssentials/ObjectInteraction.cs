@@ -9,6 +9,7 @@ public class ObjectInteraction : MonoBehaviour
     public Level1Tracker _leveltrack;
     public Level2EndCheckPoint _level2track;
     public GameObject _playerBoomerang;
+    public GameObject meteor;
 
     [Header("Fan Settings")]
     public float curFanStrength;
@@ -56,6 +57,11 @@ public class ObjectInteraction : MonoBehaviour
     //for pickups
     void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "WeakPoint")
+        {
+            Destroy(other.gameObject);
+            meteor.GetComponent<MeteorScript>().health--;
+        }
         if (other.tag == "Soda")
         {
             Debug.Log("Picked up:" + this.gameObject.name);
@@ -98,7 +104,11 @@ public class ObjectInteraction : MonoBehaviour
             FanBlower scrFanBlower = other.gameObject.GetComponent<FanBlower>();
             curFanScript = scrFanBlower;
             FanStart();
-           
+            if (gameObject.GetComponent<SimpleAirPlaneController>().finalTurbo)
+            {
+                meteor.GetComponent<MeteorScript>().SpawningMeteors = true;
+                gameObject.GetComponent<SimpleAirPlaneController>().defaultSpeed = 1500f;
+            }
         }
 
         if(other.tag == "Level2Check")

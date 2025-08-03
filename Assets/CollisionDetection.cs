@@ -17,19 +17,19 @@ public class CollisionDetection : MonoBehaviour
         }
         if (other.gameObject.tag == "ActivateMeteor")
         {
-            meteor.GetComponent<ContainerScript>().SpawningMeteors = true;
+            meteor.GetComponent<MeteorScript>().SpawningMeteors = true;
             thrust.maxAcc = 15f;
             thrust.acc = 5f;
         }
         if (other.gameObject.tag == "WeakPoint")
         {
             Destroy(other.gameObject);
-            meteor.GetComponent<ContainerScript>().health--;
+            meteor.GetComponent<MeteorScript>().health--;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "ActivateMeteor") meteor.GetComponent<ContainerScript>().SpawningMeteors = false;
+        if (other.gameObject.tag == "ActivateMeteor") meteor.GetComponent<MeteorScript>().SpawningMeteors = false;
     }
     private void OnCollisionEnter(Collision other)
     {
