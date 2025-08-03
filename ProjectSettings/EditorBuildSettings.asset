@@ -5,12 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Levels/GMTK_Demo.unity
-    guid: b2e36c993a1fa4b498a95b2c19a7de70
-  - enabled: 0
-    path: Assets/Levels/BoomerangTest.unity
-    guid: 5f5a9bf1566ee194b836d316bdbd42c0
   - enabled: 1
     path: Assets/Levels/FinalGameLevels/MainMenu.unity
     guid: 6c5a606388ddc9541a0ee82350718a54
@@ -29,9 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Level 4.unity
     guid: af961c1077e199d408fc4326d2af9e92
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Levels/FinalGameLevels/Intermission 2.unity
+    guid: 35f503197aa1ab84d80cac0d16b77062
+  - enabled: 1
+    path: Assets/Level 5.unity
+    guid: 16b98aab01600734aab2652966727312
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

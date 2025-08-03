@@ -65,6 +65,7 @@ public class ObjectInteraction : MonoBehaviour
         if (other.tag == "killObj")
         {
             _playerBoomerang.GetComponent<SimpleAirPlaneController>().isDead = true;
+            StartCoroutine(HandleDeath());
         }
         if (other.tag == "Paper")
         {
@@ -72,7 +73,7 @@ public class ObjectInteraction : MonoBehaviour
             paperRetrieved = true;
             PickupItem item = other.GetComponent<PickupItem>();
             item.AttachToPlayer();
-            //_level4track.SodaGrabbed = true;
+            _level2track.SodaGrabbed = true;
         }
         if (other.tag == "Door")
         {
@@ -108,6 +109,14 @@ public class ObjectInteraction : MonoBehaviour
             Level2EndCheckPoint endLevel = other.gameObject.GetComponent<Level2EndCheckPoint>();
             endLevel.BackatBed = true;
         }
+    }
+
+    public IEnumerator HandleDeath()
+    {
+        yield return new WaitForSeconds(3);
+        SceneLoader sceneM = GameObject.Find("SceneManager").GetComponent<SceneLoader>();
+        sceneM.GetSceneActiveNameNow();
+        sceneM.LoadScene(sceneM.retrievedSceneName);
     }
 
     void OnTriggerExit(Collider other)

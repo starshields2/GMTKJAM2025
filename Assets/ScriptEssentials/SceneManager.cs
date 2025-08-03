@@ -7,6 +7,7 @@ public class SceneLoader : MonoBehaviour
 {
     public ObjectiveTracker _objectiveTracker;
     public string sceneName;
+    public string retrievedSceneName;
     public Animator _transition;
     public float _transitionTime;
 
@@ -31,11 +32,23 @@ public class SceneLoader : MonoBehaviour
             yield return new WaitForSeconds(10);
             LoadScene("Level 4");
         }
+
+        if (scene.name == "Intermission 2")
+        {
+            yield return new WaitForSeconds(10);
+            LoadScene("Level 5");
+        }
     }
     //to load a scene instantly
     public void LoadScene(string sceneToLoad)
     {
         SceneManager.LoadScene(sceneToLoad);
+    }
+
+    public void GetSceneActiveNameNow()
+    {
+        Scene thisScene = SceneManager.GetActiveScene();
+        retrievedSceneName = thisScene.name;
     }
 
     void OnTriggerEnter2D(Collider2D other)
